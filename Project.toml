@@ -1,0 +1,6 @@
+authors = ["Timo Kluck <tkluck@infty.nl>"]
+name = "InPlace"
+uuid = "3f4c329c-cfd2-11e8-3e61-6f7259c7caaf"
+version = "0.1.0"
+
+[deps]
