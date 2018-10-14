@@ -85,6 +85,8 @@ inplace!(::typeof(-), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.sub!(a,b,
 inplace!(::typeof(*), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.mul!(a,b,c); a)
 inplace!(::typeof(*), a::BigInt, b::BigInt, c::Int) = (Base.GMP.MPZ.mul_si!(a,b,c); a)
 
+inplace!(op, a::BigInt, b::BigInt, c) = inplace!(op, a, b, convert(BigInt, c))
+
 inplace!(::typeof(+), a::BigInt, b::BigInt) = (Base.GMP.MPZ.set!(a,b); a)
 inplace!(::typeof(-), a::BigInt, b::BigInt) = (Base.GMP.MPZ.neg!(a,b); a)
 

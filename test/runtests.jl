@@ -7,7 +7,7 @@ using InPlace
     b = a
     c = deepcopy(a)
 
-    @inplace a += big"1"
+    @inplace a += 1
     @test a == b == 2
     @test c == 1
 
@@ -19,7 +19,7 @@ using InPlace
     @test a == b == 2
     @test c == 1
 
-    @inplace a -= big"1"
+    @inplace a -= 1
     @test a == b == 1
     @test c == 1
 end
