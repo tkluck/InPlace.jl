@@ -27,6 +27,9 @@ value is actually modified. For this reason, one should use this operation
 only on values for which the current stackframe holds the only reference; e.g.
 by using `deepcopy`.
 
+In this version of the package, it is only the `+`,`-` (unary and binary) and
+`*` operations that are done in-place, and only for `BigInt` operands.
+
 ## References
 
 This package was created for speeding up [`PolynomialRings.jl`][poly].
