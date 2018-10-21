@@ -1,5 +1,9 @@
 # InPlace.jl - in-place operations where possible
 
+| **Build Status**                                                | **Test coverage**                                       |
+|:---------------------------------------------------------------:|:-------------------------------------------------------:|
+| [![][travis-img]][travis-url] [![][appveyor-img]][appveyor-url] | [![Coverage Status][codecov-img]][codecov-url]      |
+
 ## Synopsis
 
 ```julia
@@ -35,3 +39,12 @@ In this version of the package, it is only the `+`,`-` (unary and binary) and
 This package was created for speeding up [`PolynomialRings.jl`][poly].
 
 [poly]: https://github.com/tkluck/PolynomialRings.jl
+
+[travis-img]: https://travis-ci.org/tkluck/InPlace.jl.svg?branch=master
+[travis-url]: https://travis-ci.org/tkluck/InPlace.jl
+
+[appveyor-img]: https://ci.appveyor.com/api/projects/status/4g6ax1ni7ijx3rn4?svg=true
+[appveyor-url]: https://ci.appveyor.com/project/tkluck/inplace-jl
+
+[codecov-img]: https://codecov.io/gh/tkluck/InPlace.jl/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/tkluck/InPlace.jl
