@@ -100,6 +100,8 @@ inplace!(op, a::BigInt, b::BigInt, c::Integer) = inplace!(op, a, b, convert(BigI
 inplace!(::typeof(+), a::BigInt, b::BigInt) = (Base.GMP.MPZ.set!(a,b); a)
 inplace!(::typeof(-), a::BigInt, b::BigInt) = (Base.GMP.MPZ.neg!(a,b); a)
 
+inplace!(::typeof(identity), a::BigInt, b::BigInt) = (Base.GMP.MPZ.set!(a,b); a)
+inplace!(::typeof(identity), a::BigInt, b::Int) = (Base.GMP.MPZ.set_si!(a, b); a)
 
 
 end # module
