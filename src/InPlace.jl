@@ -46,31 +46,41 @@ only on values for which the current stackframe holds the only reference; e.g.
 by using `deepcopy`.
 """
 macro inplace(assignment)
-    if assignment.head == :(=)
-        @assert assignment.args[2].head == :call
-        tgt  = esc(assignment.args[1])
+    operation = collect(string(assignment.head))
+    (isassignment = last(operation) == '=') && pop!(operation)
+    (isbroadcast = !isempty(operation) && first(operation) == '.') && popfirst!(operation)
+    hasinclusiveop = !isempty(operation)
+
+    isassignment || error("Cannot use in-place operation for $(assignment.head) expression")
+
+    tgt  = esc(assignment.args[1])
+
+    head = isbroadcast ? :(.=) : :(=)
+
+    if hasinclusiveop
+        op = esc(Symbol(join(operation)))
+        srcs = [esc(assignment.args[2])]
+    elseif assignment.args[2] isa Expr && assignment.args[2].head == :call
         op   = esc(assignment.args[2].args[1])
         srcs = map(esc, assignment.args[2].args[2:end])
-        call = :(
-            $inplace!($op, $tgt)
-        )
-        for src in srcs
-            push!(call.args, src)
-        end
-        return :( $tgt = $call )
     else
-        opchar, eqchar = string(assignment.head)
-        @assert eqchar == '='
-        @assert length(assignment.args) == 2
-
-        tgt = esc(assignment.args[1])
-        op  = esc(Symbol(opchar))
-        src = esc(assignment.args[2])
-        call = :(
-            $inclusiveinplace!($op, $tgt, $src)
-        )
-        return :( $tgt = $call )
+        op = identity
+        srcs = [esc(assignment.args[2])]
     end
+
+    if isbroadcast && hasinclusiveop
+        call = :( inclusiveinplace!.($op, $tgt, $(srcs...)) )
+    elseif isbroadcast && !hasinclusiveop
+        call = :( inplace!.($op, $tgt, $(srcs...)) )
+    elseif !isbroadcast && hasinclusiveop
+        call = :( inclusiveinplace!($op, $tgt, $(srcs...)) )
+    elseif !isbroadcast && !hasinclusiveop
+        call = :( inplace!($op, $tgt, $(srcs...)) )
+    else
+        error("not reachable")
+    end
+
+    return Expr(head, tgt, call)
 end
 
 export @inplace
