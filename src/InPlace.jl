@@ -101,5 +101,13 @@ inplace!(::typeof(-), a::BigInt, b::BigInt) = (Base.GMP.MPZ.neg!(a,b); a)
 inplace!(::typeof(identity), a::BigInt, b::BigInt) = (Base.GMP.MPZ.set!(a,b); a)
 inplace!(::typeof(identity), a::BigInt, b::Int) = (Base.GMP.MPZ.set_si!(a, b); a)
 
+inplace!(::typeof(div), q::BigInt, n::BigInt, d::BigInt) = (Base.GMP.MPZ.tdiv_q!(q,n,d); q)
+inplace!(::typeof(rem), r::BigInt, n::BigInt, d::BigInt) = (Base.GMP.MPZ.tdiv_r!(r,n,d); r)
+
+inplace!(::typeof(gcd), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.gcd!(a,b,c); a)
+inplace!(::typeof(lcm), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.lcm!(a,b,c); a)
+
+inplace!(::typeof(abs), a::BigInt, b::BigInt) = (signbit(b) ? Base.GMP.MPZ.neg!(a,b) : Base.GMP.MPZ.set!(a,b); a)
+inplace!(::typeof(flipsign), a::BigInt, b::BigInt, c) = (signbit(c) ? Base.GMP.MPZ.neg!(a,b) : Base.GMP.MPZ.set!(a,b); a)
 
 end # module
