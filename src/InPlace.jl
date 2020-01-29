@@ -93,7 +93,14 @@ export @inplace
 inplace!(::typeof(+), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.add!(a,b,c); a)
 inplace!(::typeof(-), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.sub!(a,b,c); a)
 inplace!(::typeof(*), a::BigInt, b::BigInt, c::BigInt) = (Base.GMP.MPZ.mul!(a,b,c); a)
-inplace!(::typeof(*), a::BigInt, b::BigInt, c::Int) = (Base.GMP.MPZ.mul_si!(a,b,c); a)
+
+inplace!(::typeof(+), a::BigInt, b::BigInt, c::Integer) = inplace!(+,a,b,convert(BigInt,c))
+inplace!(::typeof(+), a::BigInt, b::Integer, c::BigInt) = inplace!(+,a,convert(BigInt,b),c)
+inplace!(::typeof(-), a::BigInt, b::BigInt, c::Integer) = inplace!(-,a,b,convert(BigInt,c))
+inplace!(::typeof(-), a::BigInt, b::Integer, c::BigInt) = inplace!(-,a,convert(BigInt,b),c)
+
+inplace!(::typeof(*), a::BigInt, b::BigInt, c::Integer) = (Base.GMP.MPZ.mul_si!(a,b,c); a)
+inplace!(::typeof(*), a::BigInt, b::Integer, c::BigInt) = (Base.GMP.MPZ.mul_si!(a,c,b); a)
 
 inplace!(::typeof(+), a::BigInt, b::BigInt) = (Base.GMP.MPZ.set!(a,b); a)
 inplace!(::typeof(-), a::BigInt, b::BigInt) = (Base.GMP.MPZ.neg!(a,b); a)
