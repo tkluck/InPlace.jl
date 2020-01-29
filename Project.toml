@@ -1,7 +1,7 @@
 name = "InPlace"
 uuid = "12a7aed9-f4ee-5e21-a57e-4f63a8148421"
 authors = ["Timo Kluck <tkluck@infty.nl>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [compat]
 julia = "1.0"
