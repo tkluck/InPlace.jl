@@ -1,8 +1,8 @@
 # InPlace.jl - in-place operations where possible
 
-| **Build Status**                                                | **Test coverage**                                       |
-|:---------------------------------------------------------------:|:-------------------------------------------------------:|
-| [![][travis-img]][travis-url] [![][appveyor-img]][appveyor-url] | [![Coverage Status][codecov-img]][codecov-url]      |
+| **Build Status**         | **Test coverage**                              |
+|:------------------------:|:----------------------------------------------:|
+| [![][c-i-img]][c-i-url]  | [![Coverage Status][codecov-img]][codecov-url] |
 
 ## Synopsis
 
@@ -40,11 +40,8 @@ This package was created for speeding up [`PolynomialRings.jl`][poly].
 
 [poly]: https://github.com/tkluck/PolynomialRings.jl
 
-[travis-img]: https://travis-ci.org/tkluck/InPlace.jl.svg?branch=master
-[travis-url]: https://travis-ci.org/tkluck/InPlace.jl
-
-[appveyor-img]: https://ci.appveyor.com/api/projects/status/4g6ax1ni7ijx3rn4?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/tkluck/inplace-jl
+[c-i-img]: https://github.com/tkluck/InPlace.jl/workflows/CI/badge.svg
+[c-i-url]: https://github.com/tkluck/InPlace.jl/actions?query=workflow%3ACI
 
 [codecov-img]: https://codecov.io/gh/tkluck/InPlace.jl/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/tkluck/InPlace.jl
